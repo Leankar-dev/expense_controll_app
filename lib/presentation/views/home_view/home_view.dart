@@ -13,7 +13,7 @@ class HomeView extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.amber[100],
       appBar: CustomAppbar(title: 'Expense Controll App'),
-      bottomNavigationBar: CustomNavigationBar(currentIndex: 0),
+      bottomNavigationBar: CustomNavigationBar(currentIndex: 1),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: ListView(

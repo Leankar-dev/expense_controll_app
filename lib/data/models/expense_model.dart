@@ -18,25 +18,25 @@ class ExpenseModel {
   });
 
   Map<String, dynamic> toMap() {
-    return <String, dynamic>{
+    return {
       'id': id,
       'amount': amount,
       'category': category,
       'description': description,
-      'date': date.millisecondsSinceEpoch,
+      // 'date': date.millisecondsSinceEpoch,
+      'date': date.toIso8601String(),
       'paymentMethod': paymentMethod,
     };
   }
 
   factory ExpenseModel.fromMap(Map<String, dynamic> map) {
     return ExpenseModel(
-      id: map['id'] != null ? map['id'] as int : null,
-      amount: map['amount'] as double,
-      category: map['category'] as String,
-      description:
-          map['description'] != null ? map['description'] as String : null,
-      date: DateTime.fromMillisecondsSinceEpoch(map['date'] as int),
-      paymentMethod: map['paymentMethod'] as String,
+      id: map['id'],
+      amount: map['amount'],
+      category: map['category'],
+      description: map['description'],
+      date: DateTime.parse(map['date']),
+      paymentMethod: map['paymentMethod'],
     );
   }
 
