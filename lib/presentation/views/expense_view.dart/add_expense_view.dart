@@ -145,7 +145,8 @@ class _AddExpenseViewState extends State<AddExpenseView> {
                       paymentMethod: _selectedPaymentMethod!,
                     );
 
-                    await expenseProvider.addExpense(newExpense);
+                    // await expenseProvider.addExpense(newExpense);
+
                     Navigator.pop(context);
                   }
                 },
