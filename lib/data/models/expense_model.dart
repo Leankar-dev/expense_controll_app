@@ -23,7 +23,6 @@ class ExpenseModel {
       'amount': amount,
       'category': category,
       'description': description,
-      // 'date': date.millisecondsSinceEpoch,
       'date': date.toIso8601String(),
       'paymentMethod': paymentMethod,
     };
