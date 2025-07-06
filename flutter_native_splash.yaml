@@ -1,0 +1,14 @@
+flutter_native_splash:
+  color: "#D0E3FF"
+  image: assets/images/splash_image1.png
+  branding: assets/logos/logo_leankar-dev.png
+  branding_mode: bottom
+
+  android_12:
+    color: "#D0E3FF"
+    image: assets/images/splash_image1.png
+    icon_background_color: "#D0E3FF"
+    branding: assets/logos/logo_leankar-dev.png
+    branding_mode: bottom
+
+  web: true
