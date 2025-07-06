@@ -9,7 +9,12 @@ class LocalDbService {
 
   Future<void> init() async {
     final path = join(await getDatabasesPath(), 'expensecontroll.db');
-    _db = await openDatabase(path, version: 1, onCreate: _onCreate);
+    _db = await openDatabase(
+      path,
+      version: 2, // Versão atualizada
+      onCreate: _onCreate,
+      onUpgrade: _onUpgrade,
+    );
   }
 
   Future<void> _onCreate(Database db, int version) async {
@@ -21,7 +26,8 @@ class LocalDbService {
         description TEXT,
         date TEXT,
         paymentMethod TEXT,
-        receiptMethod TEXT
+        receiptMethod TEXT,
+        type TEXT DEFAULT 'expense'
       );
     ''');
 
@@ -31,6 +37,20 @@ class LocalDbService {
         name TEXT NOT NULL
       );
     ''');
+  }
+
+  Future<void> _onUpgrade(Database db, int oldVersion, int newVersion) async {
+    if (oldVersion < 2) {
+      await db.execute(
+        'ALTER TABLE transactions ADD COLUMN type TEXT DEFAULT "expense"',
+      );
+    }
+  }
+
+  Future<void> resetAndRecreateDatabase() async {
+    final path = join(await getDatabasesPath(), 'expensecontroll.db');
+    await deleteDatabase(path);
+    await init();
   }
 
   Future<Database> get _database async {

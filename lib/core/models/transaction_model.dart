@@ -2,6 +2,8 @@ enum PaymentMethod { creditCard, mbWay, cash, debitCard, pix }
 
 enum ReceiptMethod { cash, deposit, pix }
 
+enum TransactionType { income, expense }
+
 class TransactionModel {
   final int? id;
   final double value;
@@ -10,6 +12,7 @@ class TransactionModel {
   final DateTime date;
   final PaymentMethod paymentMethod;
   final ReceiptMethod receiptMethod;
+  final TransactionType type;
 
   TransactionModel({
     this.id,
@@ -19,6 +22,7 @@ class TransactionModel {
     required this.date,
     required this.paymentMethod,
     required this.receiptMethod,
+    required this.type,
   }) : assert(value >= 0, 'O valor não pode ser negativo.');
 
   factory TransactionModel.fromMap(Map<String, dynamic> map) {
@@ -34,6 +38,10 @@ class TransactionModel {
       receiptMethod: ReceiptMethod.values.firstWhere(
         (e) => e.name == map['receiptMethod'],
       ),
+      type: TransactionType.values.firstWhere(
+        (e) => e.name == map['type'],
+        orElse: () => TransactionType.expense,
+      ),
     );
   }
 
@@ -46,6 +54,7 @@ class TransactionModel {
       'date': date.toIso8601String(),
       'paymentMethod': paymentMethod.name,
       'receiptMethod': receiptMethod.name,
+      'type': type.name,
     };
   }
 

@@ -24,6 +24,7 @@ class _AddEditTransactionViewState
   String _selectedCategory = 'Outros';
   PaymentMethod _paymentMethod = PaymentMethod.cash;
   ReceiptMethod _receiptMethod = ReceiptMethod.cash;
+  TransactionType _transactionType = TransactionType.expense;
 
   @override
   void initState() {
@@ -36,6 +37,7 @@ class _AddEditTransactionViewState
       _selectedDate = t.date;
       _paymentMethod = t.paymentMethod;
       _receiptMethod = t.receiptMethod;
+      _transactionType = t.type;
     }
   }
 
@@ -67,6 +69,7 @@ class _AddEditTransactionViewState
       date: _selectedDate,
       paymentMethod: _paymentMethod,
       receiptMethod: _receiptMethod,
+      type: _transactionType,
     );
 
     final viewModel = ref.read(transactionViewModelProvider.notifier);
@@ -106,6 +109,31 @@ class _AddEditTransactionViewState
                     return 'Informe um valor válido ≥ 0';
                   return null;
                 },
+              ),
+              const SizedBox(height: 12),
+              Row(
+                children: [
+                  ChoiceChip(
+                    label: const Text('Despesa'),
+                    selected: _transactionType == TransactionType.expense,
+                    selectedColor: Colors.red.shade300,
+                    onSelected: (_) {
+                      setState(
+                        () => _transactionType = TransactionType.expense,
+                      );
+                    },
+                  ),
+                  const SizedBox(width: 12),
+                  ChoiceChip(
+                    label: const Text('Receita'),
+                    selected: _transactionType == TransactionType.income,
+                    selectedColor: const Color(0xFF081F5C),
+                    onSelected: (_) {
+                      setState(() => _transactionType = TransactionType.income);
+                    },
+                    labelStyle: const TextStyle(color: Colors.white),
+                  ),
+                ],
               ),
               const SizedBox(height: 12),
               TextFormField(

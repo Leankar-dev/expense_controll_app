@@ -1,3 +1,4 @@
+import 'package:expense_controll_app/app/categories/category_view_model.dart';
 import 'package:expense_controll_app/app/transactions/transaction_view_model.dart';
 import 'package:expense_controll_app/core/services/auth_service.dart';
 import 'package:expense_controll_app/core/services/firestore_service.dart';
@@ -21,7 +22,7 @@ Future<void> setupDependencies() async {
   // getIt.registerFactory<RegisterViewModel>(() => RegisterViewModel());
   // getIt.registerFactory<HomeViewModel>(() => HomeViewModel());
   getIt.registerFactory<TransactionViewModel>(() => TransactionViewModel());
-  // getIt.registerFactory<CategoryViewModel>(() => CategoryViewModel());
+  getIt.registerFactory<CategoryViewModel>(() => CategoryViewModel());
   // getIt.registerFactory<DashboardViewModel>(() => DashboardViewModel());
   // getIt.registerFactory<SettingsViewModel>(() => SettingsViewModel());
 }

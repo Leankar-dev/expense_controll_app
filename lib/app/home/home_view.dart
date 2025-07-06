@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../app/transactions/add_edit_transaction_view.dart';
 import '../../app/transactions/transaction_view_model.dart';
+import '../../core/models/transaction_model.dart';
 
 class HomeView extends ConsumerWidget {
   const HomeView({super.key});
@@ -17,7 +18,7 @@ class HomeView extends ConsumerWidget {
           IconButton(
             icon: const Icon(Icons.filter_list),
             onPressed: () {
-              // TODO: abrir filtros
+              // TODO: implementar filtros
             },
           ),
         ],
@@ -30,10 +31,18 @@ class HomeView extends ConsumerWidget {
               itemCount: transactions.length,
               itemBuilder: (context, index) {
                 final t = transactions[index];
+                final isIncome = t.type == TransactionType.income;
+                final valueColor = isIncome
+                    ? const Color(0xFF081F5C)
+                    : Colors.red;
+
                 return ListTile(
                   title: Text(
                     '${t.category} - €${t.value.toStringAsFixed(2)}',
-                    style: const TextStyle(fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: valueColor,
+                    ),
                   ),
                   subtitle: Text(
                     '${t.description}\n${_formatDate(t.date)} • ${t.paymentMethod.name} → ${t.receiptMethod.name}',
