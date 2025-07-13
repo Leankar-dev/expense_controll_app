@@ -59,8 +59,6 @@ class LocalDbService {
     return _db!;
   }
 
-  // ===================== TRANSACTIONS =====================
-
   Future<int> insertTransaction(TransactionModel transaction) async {
     final db = await _database;
     return await db.insert('transactions', transaction.toMap());
@@ -68,7 +66,7 @@ class LocalDbService {
 
   Future<List<TransactionModel>> getAllTransactions() async {
     final db = await _database;
-    final maps = await db.query('transactions', orderBy: 'date DESC');
+    final maps = await db.query('transactions', orderBy: 'date ASC');
     return maps.map((e) => TransactionModel.fromMap(e)).toList();
   }
 
@@ -86,8 +84,6 @@ class LocalDbService {
     final db = await _database;
     return await db.delete('transactions', where: 'id = ?', whereArgs: [id]);
   }
-
-  // ===================== CATEGORIES =====================
 
   Future<int> insertCategory(CategoryModel category) async {
     final db = await _database;
@@ -114,8 +110,6 @@ class LocalDbService {
       whereArgs: [category.id],
     );
   }
-
-  // ===================== EXTRA =====================
 
   Future<void> clearAllData() async {
     final db = await _database;
