@@ -1,3 +1,4 @@
+import 'package:expense_controll_app/core/widgets/custom_neumorphic_buttom.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -155,6 +156,7 @@ class _AddEditTransactionViewState
                   ),
                   DropdownMenuItem(value: 'Educação', child: Text('Educação')),
                   DropdownMenuItem(value: 'Saúde', child: Text('Saúde')),
+                  DropdownMenuItem(value: 'Salário', child: Text('Salário')),
                   DropdownMenuItem(value: 'Outros', child: Text('Outros')),
                 ],
                 onChanged: (value) {
@@ -197,10 +199,10 @@ class _AddEditTransactionViewState
                 },
               ),
               const SizedBox(height: 24),
-              ElevatedButton.icon(
+              CustomNeumorphicButton(
+                label: 'Salvar',
+                icon: Icons.save,
                 onPressed: _save,
-                icon: const Icon(Icons.save),
-                label: const Text('Salvar'),
               ),
             ],
           ),
