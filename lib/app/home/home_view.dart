@@ -22,7 +22,7 @@ class HomeView extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Transações'),
+        title: Center(child: const Text('Transações')),
         actions: [
           IconButton(
             icon: const Icon(Icons.filter_alt),
